@@ -51,10 +51,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### Testing
 
-- Write tests as needed for critical functionality
+- RSpec for testing framework
 - System tests for user flows
 - Model tests for validations/methods
 - Service tests for business logic
+- Request specs for API endpoints
 - Maintain good test coverage
 
 ### Database Design
@@ -116,7 +117,7 @@ bin/setup             # Setup database
 bin/dev               # Start Rails + Tailwind watcher
 bin/rails console     # Rails console (or bin/rails c)
 bin/rails db:migrate  # Run migrations
-bin/rails test        # Run tests
+bin/rails spec        # Run RSpec tests
 bin/rubocop           # Ruby style checks
 bin/brakeman          # Security scanner
 
@@ -133,4 +134,4 @@ psql                  # PostgreSQL console
 - Tailwind CSS with Foreman watch process
 - PostgreSQL with Solid Cache/Queue/Cable
 - Propshaft asset pipeline
-- No test framework configured yet
+- RSpec configured for testing
