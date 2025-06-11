@@ -1,24 +1,120 @@
-# README
+# Todos - Rails Application
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A modern Rails 8.0.2 application for managing todos.
 
-Things you may want to cover:
+## Prerequisites
 
-* Ruby version
+- macOS (tested on macOS 15.5)
+- [Homebrew](https://brew.sh/)
+- [mise](https://mise.jdx.dev/) - for Ruby and PostgreSQL version management
 
-* System dependencies
+## Setup
 
-* Configuration
+### 1. Install mise
 
-* Database creation
+```bash
+brew install mise
+```
 
-* Database initialization
+### 2. Install PostgreSQL dependencies
 
-* How to run the test suite
+PostgreSQL requires several Homebrew packages to compile successfully:
 
-* Services (job queues, cache servers, search engines, etc.)
+```bash
+brew install icu4c openssl@3 ossp-uuid readline zlib
+```
 
-* Deployment instructions
+### 3. Clone and setup the project
 
-* ...
+```bash
+git clone <repository-url>
+cd todos
+```
+
+### 4. Install Ruby and PostgreSQL
+
+The project uses mise to manage tool versions. Simply run:
+
+```bash
+mise install
+```
+
+This will install:
+- Ruby 3.3.7
+- PostgreSQL 17.5
+
+**Note on PostgreSQL installation**: If the PostgreSQL installation fails with missing library errors, you may need to set environment variables to help it find the Homebrew dependencies:
+
+```bash
+LDFLAGS="-L/opt/homebrew/opt/openssl@3/lib -L/opt/homebrew/opt/icu4c@77/lib -L/opt/homebrew/opt/ossp-uuid/lib" \
+CPPFLAGS="-I/opt/homebrew/opt/openssl@3/include -I/opt/homebrew/opt/icu4c@77/include -I/opt/homebrew/opt/ossp-uuid/include" \
+PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@3/lib/pkgconfig:/opt/homebrew/opt/icu4c@77/lib/pkgconfig" \
+mise install postgres@latest
+```
+
+### 5. Setup PostgreSQL
+
+After PostgreSQL is installed, you need to create a database user:
+
+```bash
+# Create a superuser role with your username
+mise exec postgres -- psql -U postgres -c "CREATE ROLE $USER WITH SUPERUSER LOGIN;"
+
+# Create a database with your username
+mise exec postgres -- createdb $USER
+```
+
+### 6. Install Ruby dependencies
+
+```bash
+bundle install
+```
+
+### 7. Setup the database
+
+```bash
+bin/rails db:create
+bin/rails db:migrate
+bin/rails db:seed  # if you have seed data
+```
+
+## Running the Application
+
+Start the development server and Tailwind CSS watcher:
+
+```bash
+bin/dev
+```
+
+Visit http://localhost:3000
+
+## Development Commands
+
+- `bin/rails console` - Interactive Rails console
+- `bin/rails db:migrate` - Run database migrations
+- `bin/rubocop` - Run Ruby style checks
+- `bin/brakeman` - Run security vulnerability scanner
+
+## Architecture
+
+This Rails 8.0.2 application uses:
+- **Import Maps** for JavaScript (no bundling required)
+- **Stimulus** for JavaScript behavior
+- **Turbo** for SPA-like navigation
+- **Tailwind CSS** for styling
+- **PostgreSQL** for the database
+- **Solid Cache/Queue/Cable** (database-backed, no Redis needed)
+
+## Troubleshooting
+
+### PostgreSQL connection issues
+
+If you get "role does not exist" errors, ensure you've created the database user as shown in step 5.
+
+### Mise activation
+
+The `.tool-versions` file ensures the correct Ruby and PostgreSQL versions are activated when you enter the project directory. If tools aren't activated automatically, run:
+
+```bash
+mise trust
+```
