@@ -67,25 +67,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Development Workflow
 
-### Commands to Run
-
-```bash
-# Setup (first time)
-mise install          # Install all tools
-bundle install        # Install Ruby gems
-
-# Development
-bin/dev               # Start Rails with Tailwind watch
-bin/rails test        # Run test suite
-bin/rails db:migrate  # Run migrations
-bin/rubocop           # Lint Ruby code
-bin/rails routes      # View routes
-
-# Deployment checks
-bin/rails assets:precompile
-bin/rails db:prepare
-```
-
 ### Git Workflow
 
 - Feature branches from main
@@ -125,76 +106,31 @@ bin/rails db:prepare
 
 ## Development Commands
 
-### Starting the Application
-
 ```bash
-bin/dev  # Starts Rails server and Tailwind CSS watcher concurrently
+# Setup
+mise install          # Install Ruby & PostgreSQL
+bundle install        # Install gems
+bin/setup             # Setup database
+
+# Development
+bin/dev               # Start Rails + Tailwind watcher
+bin/rails console     # Rails console (or bin/rails c)
+bin/rails db:migrate  # Run migrations
+bin/rails test        # Run tests
+bin/rubocop           # Ruby style checks
+bin/brakeman          # Security scanner
+
+# PostgreSQL
+pg_ctl start          # Start PostgreSQL
+pg_ctl stop           # Stop PostgreSQL
+psql                  # PostgreSQL console
 ```
 
-### Setup
+## Architecture Notes
 
-```bash
-bin/setup  # Initial setup - installs dependencies and prepares database
-```
-
-### Database Commands
-
-```bash
-bin/rails db:create     # Create databases
-bin/rails db:migrate    # Run migrations
-bin/rails db:seed       # Load seed data
-bin/rails db:reset      # Drop, create, migrate, and seed
-```
-
-### Code Quality
-
-```bash
-bin/rubocop            # Run Ruby style checks
-bin/brakeman           # Run security vulnerability scanner
-```
-
-### Rails Console
-
-```bash
-bin/rails console      # Interactive Rails console
-bin/rails c            # Shorthand
-```
-
-### PostgreSQL Management
-
-```bash
-pg_ctl start          # Start PostgreSQL server
-pg_ctl stop           # Stop PostgreSQL server  
-pg_ctl status         # Check PostgreSQL status
-psql                  # PostgreSQL interactive terminal
-```
-
-## Architecture Overview
-
-This is a Rails 8.0.2 application using modern Rails conventions:
-
-### Frontend Stack
-
-- **Import Maps**: JavaScript modules without bundling (configured in config/importmap.rb)
-- **Stimulus**: Modest JavaScript framework for HTML you already have
-- **Turbo**: SPA-like page updates without writing JavaScript
-- **Tailwind CSS**: Utility-first CSS framework (watch with bin/dev)
-
-### Backend Architecture
-
-- **Database**: PostgreSQL with Solid Cache/Queue/Cable (all database-backed)
-- **Asset Pipeline**: Propshaft (not Sprockets) for serving assets
-- **Web Server**: Puma
-
-### Key Directories
-
-- `app/javascript/controllers/`: Stimulus controllers
-- `app/assets/stylesheets/tailwind/`: Tailwind configuration
-- `config/importmap.rb`: JavaScript module mappings
-
-### Important Notes
-
-- No test framework is currently configured
-- Uses database-backed adapters for caching, queuing, and WebSockets (no Redis needed)
-- Deployment-ready with Dockerfile and Kamal configuration
-- Development uses Foreman to manage multiple processes (Rails + Tailwind watcher)
+- Rails 8.0.2 with Import Maps (no JS bundling)
+- Stimulus + Turbo for interactivity
+- Tailwind CSS with Foreman watch process
+- PostgreSQL with Solid Cache/Queue/Cable
+- Propshaft asset pipeline
+- No test framework configured yet
