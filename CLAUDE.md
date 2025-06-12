@@ -18,6 +18,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Focus:** Modify only the code I specify or is directly related to the current task; leave everything else untouched.
 - **Steps:** Break large tasks into stages; pause after each for my approval.
 - **Planning:** Before big changes, tell me your plan and have me confirm it before proceeding.
+
+## Project Managment
+
+- **Roadmap:** PROJECT_ROADMAP.md describes the project overview and phases, including which phase is in progress and which have been completed.
+- **Phase Todo Lists:** Each phase will have a corresponding detailed checklist located at PHASE_<n>.md, for example PHASE_1.md.
 - **Tracking:** Log completed work in CHANGELOG.md. Brief bullet points, grouped by date.
 
 ## Tech Stack
