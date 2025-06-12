@@ -1,0 +1,24 @@
+buy_milk:
+  title: "Buy milk"
+  description: "Get 2% milk from the grocery store"
+  completed: false
+
+finish_report:
+  title: "Finish quarterly report"
+  description: "Complete the Q4 financial report and send to management"
+  completed: false
+
+call_dentist:
+  title: "Call dentist"
+  description: "Schedule appointment for next month"
+  completed: true
+
+empty_description:
+  title: "Task without description"
+  description: ""
+  completed: false
+
+long_title:
+  title: <%= "A" * 255 %>
+  description: "This todo has the maximum allowed title length"
+  completed: false
