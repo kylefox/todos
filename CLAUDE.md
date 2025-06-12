@@ -10,6 +10,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 4. **Do not add extraneous, unhelpful, verbose comments to the code** - Keep code clean and self-documenting
 5. **Follow YAGNI (You Ain't Gonna Need It)** - Only add configurations, dependencies, and code that are immediately needed
 6. **Keep it simple.** Think step by step about whether there exists a less over-engineered and yet simpler, more elegant, and more robust solution to the problem that accords with KISS and DRY principles.
+7. **Avoid complexity.** Always prioritize the simplest solution over complexity. If a solution is starting to feel complex, pause and ask the user for guidance and approval before continuing.
+8. **Keep codebase maintainable.** Don't create duplicate functionality, keep files focused and concise, suggest refactoring opportunities.
+
+## Workflow
+
+- **Focus:** Modify only the code I specify or is directly related to the current task; leave everything else untouched.
+- **Steps:** Break large tasks into stages; pause after each for my approval.
+- **Planning:** Before big changes, tell me your plan and have me confirm it before proceeding.
+- **Tracking:** Log completed work in CHANGELOG.md. Brief bullet points, grouped by date.
 
 ## Tech Stack
 
