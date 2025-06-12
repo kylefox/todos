@@ -5,7 +5,9 @@
 ## Phase 1: Core Todo App Foundation
 
 - **Todo list:** PHASE_1.md
-- **Status:** In Progress
+- **Status:** In Progress (~30% complete)
+- **Completed:** Basic Rails setup, Tailwind CSS, responsive layout, PWA manifest, Todo model with validations and tests
+- **Next steps:** Todo CRUD actions, real-time updates, todo UI components
 
 ### Milestone 1.1: Real-time PWA Todo Management
 - Create, edit, and delete todos with instant updates
