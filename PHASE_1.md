@@ -6,7 +6,7 @@ This checklist breaks down the implementation of our real-time PWA todo manageme
 
 - [ ] Initialize Rails 8 application with PostgreSQL
 - [ ] Configure Solid Cable, Solid Cache, and Solid Queue
-- [ ] Set up Tailwind CSS with daisyUI components
+- [ ] Set up Tailwind CSS
 - [ ] Configure Turbo and Stimulus
 - [ ] Create responsive base layout
 - [ ] Set up mobile viewport meta tags

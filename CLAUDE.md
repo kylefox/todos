@@ -55,13 +55,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Progressive enhancement approach
 - Graceful degradation for non-JS
 
-### UI Development with daisyUI
+### UI Development with Tailwind CSS
 
-- Use semantic component classes (btn, card, modal, etc.)
-- Avoid excessive utility classes when daisyUI components exist
-- Apply themes for consistent styling
-- Customize with Tailwind utilities when needed
-- Reference: https://daisyui.com/components/
+- Use utility-first approach for styling
+- Create reusable component patterns
+- Keep styling consistent across components
+- Use Tailwind's built-in design system
+- Leverage responsive utilities for mobile-first design
 
 ### Testing
 
