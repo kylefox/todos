@@ -4,6 +4,9 @@
 
 ## Phase 1: Core Todo App Foundation
 
+- **Todo list:** PHASE_1.md
+- **Status:** In Progress
+
 ### Milestone 1.1: Real-time PWA Todo Management
 - Create, edit, and delete todos with instant updates
 - Mark todos as complete/incomplete with real-time sync
