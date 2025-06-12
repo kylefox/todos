@@ -2,24 +2,22 @@
 
 **TaskFlow** is a collaborative task management application that helps teams create, organize, and track todos across projects. The app focuses on simplicity and real-time collaboration, working seamlessly across desktop, mobile, and as a progressive web app.
 
-## Phase 1: Core Todo Functionality
+## Phase 1: Core Todo Functionality with Real-time Updates
 
-### Milestone 1.1: Basic Todo Management
-- Create, edit, and delete todos
-- Mark todos as complete/incomplete
+### Milestone 1.1: Real-time Todo Management
+- Create, edit, and delete todos with instant updates
+- Mark todos as complete/incomplete with real-time sync
 - View all todos in a clean, organized list
+- Changes appear instantly across all open browser tabs
+- Optimistic UI updates for smooth user experience
 - Basic form validation and error handling
 
-### Milestone 1.2: Real-time Updates
-- Changes sync instantly across all open browser tabs/windows
-- Optimistic UI updates for smooth user experience
-- Works without page refreshes
-
-### Milestone 1.3: Progressive Web App
+### Milestone 1.2: Progressive Web App Foundation
 - Install app on mobile/desktop devices
 - Works offline for viewing todos
-- Fast loading with caching
+- Fast loading with basic caching
 - Responsive design for all screen sizes
+- Mobile-friendly touch interactions
 
 ## Phase 2: Enhanced Todo Features
 
