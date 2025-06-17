@@ -28,24 +28,24 @@ This checklist breaks down the implementation of our real-time PWA todo manageme
 - [x] Add database indexes
 - [x] Create model validations
 - [x] Add timestamps (created_at, updated_at)
-- [x] Set up model callbacks for broadcasting (prepared, but commented out pending view creation)
+- [x] Set up model callbacks for broadcasting (enabled for real-time updates)
 
 ## Todo Controllers & Routes
 
 - [x] Create TodosController
-- [x] Set up RESTful routes (partial - index only)
+- [x] Set up RESTful routes (all CRUD actions)
 - [x] Implement index action with todo list
-- [ ] Implement create action with Turbo Stream response
-- [ ] Implement update action for inline editing
-- [ ] Implement destroy action with Turbo Stream
-- [ ] Add error handling and flash messages
+- [x] Implement create action with Turbo Stream response
+- [x] Implement update action for inline editing
+- [x] Implement destroy action with Turbo Stream
+- [x] Add error handling and flash messages
 
 ## Todo Views & UI
 
 - [x] Design mobile-first todo list layout
-- [ ] Create todo item partial with checkbox
-- [ ] Build new todo form (inline or modal)
-- [ ] Style todo states (active, completed)
+- [x] Create todo item partial with checkbox
+- [x] Build new todo form (inline)
+- [x] Style todo states (active, completed)
 - [ ] Add loading states and indicators
 - [ ] Implement swipe gestures for mobile
 - [x] Create empty state design
@@ -53,12 +53,12 @@ This checklist breaks down the implementation of our real-time PWA todo manageme
 
 ## Real-time Features
 
-- [ ] Set up Turbo Streams for todo broadcasts
-- [ ] Configure Action Cable for WebSocket connection
-- [ ] Implement optimistic UI updates with Stimulus
+- [x] Set up Turbo Streams for todo broadcasts
+- [x] Configure Action Cable for WebSocket connection
+- [x] Implement optimistic UI updates with Stimulus
 - [ ] Add connection status indicator
 - [ ] Handle offline queue for pending changes
-- [ ] Test multi-tab synchronization
+- [x] Test multi-tab synchronization
 - [ ] Add conflict resolution for simultaneous edits
 
 ## Responsive Design
@@ -73,10 +73,10 @@ This checklist breaks down the implementation of our real-time PWA todo manageme
 
 ## Forms & Validation
 
-- [ ] Build accessible form controls
-- [ ] Add client-side validation with Stimulus
+- [x] Build accessible form controls
+- [x] Add client-side validation with Stimulus
 - [x] Implement server-side validation (model level)
-- [ ] Create inline error messages
+- [x] Create inline error messages
 - [x] Add character limits for title/description (model level)
 - [ ] Implement autosave for edits
 - [ ] Add confirmation for destructive actions
@@ -105,9 +105,9 @@ This checklist breaks down the implementation of our real-time PWA todo manageme
 
 - [x] Set up RSpec test suite
 - [x] Write model specs for Todo
-- [ ] Write controller specs
-- [ ] Add system tests for user flows
-- [ ] Test real-time features
+- [x] Write controller specs
+- [x] Add system tests for user flows
+- [x] Test real-time features
 - [ ] Test offline functionality
 - [ ] Add performance benchmarks
 
@@ -115,7 +115,7 @@ This checklist breaks down the implementation of our real-time PWA todo manageme
 
 - [ ] Add subtle animations and transitions
 - [ ] Create favicon set
-- [ ] Write seed data for demos
+- [x] Write seed data for demos
 - [ ] Add analytics tracking code
 - [ ] Set up error monitoring
 - [ ] Create 404/500 error pages
