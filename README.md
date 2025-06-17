@@ -92,6 +92,7 @@ Visit http://localhost:3000
 
 - `bin/rails console` - Interactive Rails console
 - `bin/rails db:migrate` - Run database migrations
+- `bin/rails spec` - Run RSpec test suite
 - `bin/rubocop` - Run Ruby style checks
 - `bin/brakeman` - Run security vulnerability scanner
 
@@ -100,10 +101,11 @@ Visit http://localhost:3000
 This Rails 8.0.2 application uses:
 - **Import Maps** for JavaScript (no bundling required)
 - **Stimulus** for JavaScript behavior
-- **Turbo** for SPA-like navigation
+- **Turbo** for SPA-like navigation and real-time updates
 - **Tailwind CSS** for styling
 - **PostgreSQL** for the database
 - **Solid Cache/Queue/Cable** (database-backed, no Redis needed)
+- **RSpec** with comprehensive test suite (47 tests)
 
 ## Troubleshooting
 
