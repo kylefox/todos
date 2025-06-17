@@ -1,7 +1,34 @@
+<%= turbo_stream_from "todos" %>
+
 <div>
   <div class="sm:flex sm:items-center sm:justify-between mb-8">
     <h2 class="text-2xl font-bold text-gray-900">My Todos</h2>
   </div>
+
+  <%= form_with(model: Todo.new, id: "new_todo", data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset" }) do |form| %>
+    <div class="mb-6 bg-white shadow sm:rounded-lg p-4">
+      <div class="space-y-4">
+        <div>
+          <%= form.text_field :title, 
+              placeholder: "What needs to be done?",
+              class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm",
+              required: true,
+              maxlength: 255 %>
+        </div>
+        <div>
+          <%= form.text_area :description, 
+              placeholder: "Add a description (optional)",
+              rows: 2,
+              class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm",
+              maxlength: 1000 %>
+        </div>
+        <div>
+          <%= form.submit "Add Todo", 
+              class: "inline-flex justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
   
   <div class="bg-white shadow overflow-hidden sm:rounded-md">
     <% if @todos.empty? %>
@@ -13,12 +40,8 @@
         <p class="mt-1 text-sm text-gray-500">Get started by creating a new todo.</p>
       </div>
     <% else %>
-      <ul class="divide-y divide-gray-200">
-        <% @todos.each do |todo| %>
-          <li class="px-6 py-4">
-            <p>Todo item will go here</p>
-          </li>
-        <% end %>
+      <ul class="divide-y divide-gray-200" id="todos">
+        <%= render @todos %>
       </ul>
     <% end %>
   </div>
