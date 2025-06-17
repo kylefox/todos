@@ -10,6 +10,22 @@
 - Enable real-time broadcasting for multi-tab synchronization
 - Add reset_form Stimulus controller for form cleanup
 - Create seed data for testing
+- Add comprehensive test suite:
+  - Configure Capybara for system testing
+  - Create controller specs for all CRUD actions
+  - Add request specs testing Turbo Stream responses
+  - Build system specs with JavaScript testing
+  - Update model specs with broadcast testing
+  - Create test helpers for simple todo creation
+- All 47 tests passing with comprehensive coverage:
+  - 11 controller specs testing CRUD actions
+  - 21 model specs with validations and broadcasting
+  - 13 request specs testing Turbo Stream responses  
+  - 2 system specs for integration testing
+- Clarify testing dependencies per Rails documentation:
+  - `rails-controller-testing` required for `assigns()` in controller specs
+  - `capybara` required for system tests (not included in Rails by default)
+  - `selenium-webdriver` required for JavaScript system tests
 
 ## 2025-01-17
 

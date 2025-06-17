@@ -13,13 +13,7 @@ class TodosController < ApplicationController
       end
     else
       respond_to do |format|
-        format.turbo_stream { 
-          render turbo_stream: turbo_stream.replace(
-            "new_todo", 
-            partial: "todos/form", 
-            locals: { todo: @todo }
-          ) 
-        }
+        format.turbo_stream { head :unprocessable_entity }
         format.html { redirect_to todos_path, alert: @todo.errors.full_messages.join(", ") }
       end
     end

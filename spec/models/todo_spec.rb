@@ -64,26 +64,20 @@ RSpec.describe Todo, type: :model do
 
   describe 'broadcasting' do
     it 'broadcasts on create' do
-      # Skip until we have the _todo partial
-      skip "Requires _todo partial"
       expect {
         Todo.create!(title: "New todo")
       }.to have_broadcasted_to("todos")
     end
 
     it 'broadcasts on update' do
-      # Skip until we have the _todo partial
-      skip "Requires _todo partial"
-      todo = todos(:buy_milk)
+      todo = Todo.create!(title: "Test Todo")
       expect {
         todo.update!(completed: true)
       }.to have_broadcasted_to("todos")
     end
 
     it 'broadcasts on destroy' do
-      # Skip until we have the _todo partial
-      skip "Requires _todo partial"
-      todo = todos(:buy_milk)
+      todo = Todo.create!(title: "Test Todo")
       expect {
         todo.destroy!
       }.to have_broadcasted_to("todos")
