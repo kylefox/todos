@@ -47,7 +47,7 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 RSpec.configure do |config|
   # Rails controller testing
-  [:controller, :view, :request].each do |type|
+  [ :controller, :view, :request ].each do |type|
     config.include ::Rails::Controller::Testing::TestProcess, type: type
     config.include ::Rails::Controller::Testing::TemplateAssertions, type: type
     config.include ::Rails::Controller::Testing::Integration, type: type

@@ -7,7 +7,7 @@ module TodoHelpers
       completed: completed
     )
   end
-  
+
   def create_todos(count = 3)
     count.times do |i|
       create_todo(title: "Todo #{i + 1}", completed: i.even?)

@@ -5,6 +5,7 @@ We just finished a logical unit of work. It's time to update documentation and c
   - Review @CLAUDE.md for rules about managing these files.
   - Update @PROJECT_ROADMAP.MD, current phase (ex: @PHASE_1.md), and @CHANGELOG.md
   - If needed, updated @README.md and @CLAUDE.md
+- Run linters and fix all identified problems
 - Write a short & sweet commit summary
 - Write a more detailed but not overly verbose commit description
 - Commit the changes to git.
