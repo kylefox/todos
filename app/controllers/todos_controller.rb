@@ -1,4 +1,6 @@
 class TodosController < ApplicationController
+  before_action :set_todo, only: %i[update destroy]
+
   def index
     @todos = Todo.recent
   end
@@ -20,8 +22,6 @@ class TodosController < ApplicationController
   end
 
   def update
-    @todo = Todo.find(params[:id])
-
     if @todo.update(todo_params)
       respond_to do |format|
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@todo) }
@@ -29,20 +29,13 @@ class TodosController < ApplicationController
       end
     else
       respond_to do |format|
-        format.turbo_stream {
-          render turbo_stream: turbo_stream.replace(
-            @todo,
-            partial: "todos/todo",
-            locals: { todo: @todo }
-          )
-        }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@todo) }
         format.html { redirect_to todos_path, alert: @todo.errors.full_messages.join(", ") }
       end
     end
   end
 
   def destroy
-    @todo = Todo.find(params[:id])
     @todo.destroy
 
     respond_to do |format|
@@ -52,6 +45,10 @@ class TodosController < ApplicationController
   end
 
   private
+
+  def set_todo
+    @todo = Todo.find(params[:id])
+  end
 
   def todo_params
     params.require(:todo).permit(:title, :description, :completed)
