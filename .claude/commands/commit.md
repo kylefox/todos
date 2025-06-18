@@ -3,7 +3,7 @@ We just finished a logical unit of work. It's time to update documentation and c
 - Analyze your recent chat history, context, and uncommitted changes.
 - Update the project and memory files accordingly.
   - Review @CLAUDE.md for rules about managing these files.
-  - Update @PROJECT_ROADMAP.MD, current phase (ex: @PHASE_1.md), and @CHANGELOG.md
+  - Update @PROJECT_ROADMAP.MD, current phase (ex: @PHASE_1.md), and @CHANGELOG.md (unless trivial changes)
   - If needed, updated @README.md and @CLAUDE.md
 - Run linters and fix all identified problems
 - Write a short & sweet commit summary
