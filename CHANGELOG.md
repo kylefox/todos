@@ -3,6 +3,7 @@
 ## 2025-01-18 (continued)
 
 - Refactor controller specs with rspec-its gem for DRY principles
+- Apply RSpec best practices to entire test suite
 
 ## 2025-01-18
 

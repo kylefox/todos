@@ -1,89 +1,119 @@
 require 'rails_helper'
+require 'rspec/its'
 
 RSpec.describe "Todos", type: :request do
   describe "GET /todos" do
-    it "returns success" do
-      get todos_path
-      expect(response).to have_http_status(200)
-    end
+    subject(:request) { get todos_path }
 
-    it "displays todos" do
-      todo = create_todo(title: "Test Todo")
-      get todos_path
-      expect(response.body).to include("Test Todo")
+    it { is_expected.to eq(200) }
+
+    context "when todos exist" do
+      let!(:todo) { create_todo(title: "Test Todo") }
+
+      it "displays the todo" do
+        request
+        expect(response.body).to include("Test Todo")
+      end
     end
   end
 
   describe "POST /todos" do
-    context "with turbo stream format" do
-      let(:valid_params) { { todo: { title: "New Todo", description: "Description" } } }
+    subject(:request) { post todos_path, params: params, headers: headers }
 
-      it "creates todo and returns turbo stream" do
-        expect {
-          post todos_path, params: valid_params, headers: turbo_stream_headers
-        }.to change(Todo, :count).by(1)
+    let(:headers) { {} }
 
-        expect_turbo_stream_response
-        expect(turbo_stream_actions).to include("prepend")
+    context "with valid params" do
+      let(:params) { { todo: { title: "New Todo", description: "Description" } } }
+
+      context "with turbo stream format" do
+        let(:headers) { turbo_stream_headers }
+
+        it { expect { request }.to change(Todo, :count).by(1) }
+
+        context "response" do
+          before { request }
+
+          it { expect_turbo_stream_response }
+
+          it "includes prepend action" do
+            expect(turbo_stream_actions).to include("prepend")
+          end
+        end
       end
 
-      it "returns unprocessable entity for invalid todo" do
-        post todos_path, params: { todo: { title: "" } }, headers: turbo_stream_headers
-
-        expect(response).to have_http_status(:unprocessable_entity)
+      context "with HTML format" do
+        it { is_expected.to redirect_to(todos_path) }
       end
     end
 
-    context "with HTML format" do
-      it "redirects after creating todo" do
-        post todos_path, params: { todo: { title: "New Todo" } }
-        expect(response).to redirect_to(todos_path)
+    context "with invalid params" do
+      let(:params) { { todo: { title: "" } } }
+
+      context "with turbo stream format" do
+        let(:headers) { turbo_stream_headers }
+
+        it { is_expected.to eq(422) }
       end
     end
   end
 
   describe "PATCH /todos/:id" do
+    subject(:request) { patch todo_path(todo), params: params, headers: headers }
+
     let(:todo) { create_todo(completed: false) }
+    let(:params) { { todo: { completed: true } } }
+    let(:headers) { {} }
 
     context "with turbo stream format" do
-      it "updates todo and returns turbo stream" do
-        patch todo_path(todo),
-              params: { todo: { completed: true } },
-              headers: turbo_stream_headers
+      let(:headers) { turbo_stream_headers }
 
-        expect(todo.reload.completed).to be true
-        expect_turbo_stream_response
-        expect(turbo_stream_actions).to include("replace")
+      it "updates the todo" do
+        expect { request }.to change { todo.reload.completed }.from(false).to(true)
+      end
+
+      context "response" do
+        before { request }
+
+        it { expect_turbo_stream_response }
+
+        it "includes replace action" do
+          expect(turbo_stream_actions).to include("replace")
+        end
       end
     end
 
     context "with HTML format" do
-      it "redirects after updating todo" do
-        patch todo_path(todo), params: { todo: { completed: true } }
-        expect(response).to redirect_to(todos_path)
-      end
+      it { is_expected.to redirect_to(todos_path) }
     end
   end
 
   describe "DELETE /todos/:id" do
+    subject(:request) { delete todo_path(todo), headers: headers }
+
     let!(:todo) { create_todo }
+    let(:headers) { {} }
 
     context "with turbo stream format" do
-      it "destroys todo and returns turbo stream" do
-        expect {
-          delete todo_path(todo), headers: turbo_stream_headers
-        }.to change(Todo, :count).by(-1)
+      let(:headers) { turbo_stream_headers }
 
-        expect_turbo_stream_response
-        expect(turbo_stream_actions).to include("remove")
+      it { expect { request }.to change(Todo, :count).by(-1) }
+
+      context "response" do
+        before do
+          @todo_id = todo.id
+          request
+        end
+
+        it { expect_turbo_stream_response }
+
+        it "includes remove action" do
+          expect(turbo_stream_actions).to include("remove")
+        end
       end
     end
 
     context "with HTML format" do
-      it "redirects after destroying todo" do
-        delete todo_path(todo)
-        expect(response).to redirect_to(todos_path)
-      end
+      it { is_expected.to redirect_to(todos_path) }
     end
   end
 end

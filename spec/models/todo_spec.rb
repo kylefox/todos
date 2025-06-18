@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'rspec/its'
 
 RSpec.describe Todo, type: :model do
   fixtures :todos
@@ -25,9 +26,7 @@ RSpec.describe Todo, type: :model do
   describe 'defaults' do
     subject { Todo.new }
 
-    it 'sets completed to false by default' do
-      expect(subject.completed).to eq(false)
-    end
+    its(:completed) { is_expected.to eq(false) }
   end
 
   describe 'scopes' do
@@ -49,15 +48,15 @@ RSpec.describe Todo, type: :model do
     end
 
     describe '.recent' do
-      it 'orders todos by creation date descending' do
-        # Clear existing todos for this test
+      before do
         Todo.destroy_all
+        @oldest = Todo.create!(title: "Oldest", created_at: 3.days.ago)
+        @newest = Todo.create!(title: "Newest", created_at: 1.day.ago)
+        @middle = Todo.create!(title: "Middle", created_at: 2.days.ago)
+      end
 
-        oldest = Todo.create!(title: "Oldest", created_at: 3.days.ago)
-        newest = Todo.create!(title: "Newest", created_at: 1.day.ago)
-        middle = Todo.create!(title: "Middle", created_at: 2.days.ago)
-
-        expect(Todo.recent).to eq([ newest, middle, oldest ])
+      it 'orders todos by creation date descending' do
+        expect(Todo.recent).to eq([ @newest, @middle, @oldest ])
       end
     end
   end
@@ -85,26 +84,38 @@ RSpec.describe Todo, type: :model do
   end
 
   describe 'edge cases' do
-    it 'allows empty description' do
-      todo = Todo.new(title: "No description", description: "")
-      expect(todo).to be_valid
+    context 'with empty description' do
+      subject { Todo.new(title: "No description", description: "") }
+
+      it { is_expected.to be_valid }
     end
 
-    it 'allows nil description' do
-      todo = Todo.new(title: "No description", description: nil)
-      expect(todo).to be_valid
+    context 'with nil description' do
+      subject { Todo.new(title: "No description", description: nil) }
+
+      it { is_expected.to be_valid }
     end
 
-    it 'rejects title longer than 255 characters' do
-      todo = Todo.new(title: "A" * 256)
-      expect(todo).not_to be_valid
-      expect(todo.errors[:title]).to include("is too long (maximum is 255 characters)")
+    context 'with title longer than 255 characters' do
+      subject { Todo.new(title: "A" * 256) }
+
+      it { is_expected.not_to be_valid }
+
+      it 'has the correct error message' do
+        subject.valid?
+        expect(subject.errors[:title]).to include("is too long (maximum is 255 characters)")
+      end
     end
 
-    it 'rejects description longer than 1000 characters' do
-      todo = Todo.new(title: "Valid", description: "A" * 1001)
-      expect(todo).not_to be_valid
-      expect(todo.errors[:description]).to include("is too long (maximum is 1000 characters)")
+    context 'with description longer than 1000 characters' do
+      subject { Todo.new(title: "Valid", description: "A" * 1001) }
+
+      it { is_expected.not_to be_valid }
+
+      it 'has the correct error message' do
+        subject.valid?
+        expect(subject.errors[:description]).to include("is too long (maximum is 1000 characters)")
+      end
     end
   end
 end
