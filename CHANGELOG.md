@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 2025-01-18
+
+- Conduct security review of PR #3
+- Create view spec to test XSS protection in todo partial
+- Confirm Rails ERB templates properly escape HTML by default
+- Post PR review comments highlighting security concerns:
+  - Authentication system missing (valid concern)
+  - Privacy issues with global broadcasting (valid concern)
+  - XSS vulnerability (false positive - Rails escapes by default)
+
 ## 2025-01-17 (continued)
 
 - Connect TodosController to database with Todo.recent scope
