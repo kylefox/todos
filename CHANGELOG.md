@@ -9,6 +9,10 @@
   - Authentication system missing (valid concern)
   - Privacy issues with global broadcasting (valid concern)
   - XSS vulnerability (false positive - Rails escapes by default)
+- Refactor TodosController to follow Rails conventions:
+  - Add `before_action :set_todo` callback to DRY up code
+  - Remove duplicate `Todo.find` calls from update and destroy actions
+- Add controller-specific CLAUDE.md with coding conventions
 
 ## 2025-01-17 (continued)
 
