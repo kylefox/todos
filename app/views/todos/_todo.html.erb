@@ -1,0 +1,32 @@
+<%= turbo_frame_tag dom_id(todo) do %>
+  <li class="px-4 py-4 sm:px-6 hover:bg-gray-50 transition-colors">
+    <div class="flex items-start space-x-3">
+      <div class="flex-shrink-0">
+        <%= check_box_tag "todo_completed", 
+            todo.id, 
+            todo.completed?, 
+            class: "h-5 w-5 text-blue-600 rounded focus:ring-blue-500 cursor-pointer",
+            data: { 
+              controller: "todo-checkbox",
+              action: "change->todo-checkbox#toggle",
+              todo_id: todo.id
+            } %>
+      </div>
+      <div class="flex-1 min-w-0">
+        <div class="<%= 'line-through text-gray-500' if todo.completed? %>">
+          <p class="text-sm font-medium text-gray-900">
+            <%= todo.title %>
+          </p>
+          <% if todo.description.present? %>
+            <p class="mt-1 text-sm text-gray-600">
+              <%= todo.description %>
+            </p>
+          <% end %>
+        </div>
+        <div class="mt-2 text-xs text-gray-500">
+          Created <%= time_ago_in_words(todo.created_at) %> ago
+        </div>
+      </div>
+    </div>
+  </li>
+<% end %>

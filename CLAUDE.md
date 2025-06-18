@@ -66,11 +66,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Testing
 
 - RSpec for testing framework
-- System tests for user flows
+- System tests for user flows with Capybara
 - Model tests for validations/methods
-- Service tests for business logic
-- Request specs for API endpoints
-- Maintain good test coverage
+- Controller tests for CRUD actions
+- Request specs for Turbo Stream responses
+- Real-time feature testing with broadcasting
+- Maintain good test coverage (currently 47 tests)
 
 ### Database Design
 

@@ -6,8 +6,8 @@ class Todo < ApplicationRecord
   scope :incomplete, -> { where(completed: false) }
   scope :recent, -> { order(created_at: :desc) }
 
-  # Broadcasting will be enabled once we have the _todo partial
-  # after_create_commit -> { broadcast_prepend_to "todos" }
-  # after_update_commit -> { broadcast_replace_to "todos" }
-  # after_destroy_commit -> { broadcast_remove_to "todos" }
+  # Broadcasting for real-time updates
+  after_create_commit -> { broadcast_prepend_to "todos" }
+  after_update_commit -> { broadcast_replace_to "todos" }
+  after_destroy_commit -> { broadcast_remove_to "todos" }
 end
