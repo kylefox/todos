@@ -96,6 +96,20 @@ Visit http://localhost:3000
 - `bin/rubocop` - Run Ruby style checks
 - `bin/brakeman` - Run security vulnerability scanner
 
+## Useful MCP Servers
+
+[PostgreSQL](https://www.npmjs.com/package/@modelcontextprotocol/server-postgres)
+
+```bash
+claude mcp add postgres -- npx -y @modelcontextprotocol/server-postgres postgresql://127.0.0.1/todos_development
+```
+
+[Puppeteer](https://www.npmjs.com/package/@modelcontextprotocol/server-puppeteer)
+
+```bash
+claude mcp add puppeteer -- npx -y @modelcontextprotocol/server-puppeteer
+```
+
 ## Architecture
 
 This Rails 8.0.2 application uses:
