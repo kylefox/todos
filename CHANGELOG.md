@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2025-01-18 (continued)
+
+- Refactor controller specs with rspec-its gem for DRY principles
+
 ## 2025-01-18
 
 - Conduct security review of PR #3
