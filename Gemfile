@@ -55,6 +55,7 @@ group :development, :test do
   # RSpec testing framework
   gem "rspec-rails", "~> 7.1"
   gem "shoulda-matchers", "~> 6.0"
+  gem "rspec-its", "~> 2.0"
 
   # Testing dependencies
   gem "rails-controller-testing"  # For assigns() in controller specs

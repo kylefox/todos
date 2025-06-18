@@ -2,97 +2,105 @@ require 'rails_helper'
 
 RSpec.describe TodosController, type: :controller do
   describe "GET #index" do
-    it "returns a success response" do
-      get :index
-      expect(response).to be_successful
+    subject(:request) { get :index }
+
+    before do
+      Todo.delete_all
+      @old_todo = create_todo(title: "Old Todo").tap { |t| t.update!(created_at: 1.day.ago) }
+      @new_todo = create_todo(title: "New Todo")
     end
 
-    it "assigns todos ordered by recent" do
-      Todo.delete_all  # Clear any existing todos
-      old_todo = create_todo(title: "Old Todo")
-      old_todo.update!(created_at: 1.day.ago)
-      new_todo = create_todo(title: "New Todo")
+    it { is_expected.to be_successful }
 
-      get :index
-      expect(assigns(:todos).to_a).to eq([ new_todo, old_todo ])
+    it "assigns todos ordered by recent" do
+      request
+      expect(assigns(:todos).to_a).to eq([ @new_todo, @old_todo ])
     end
   end
 
   describe "POST #create" do
+    subject(:request) { post :create, params: params, format: format }
+
+    let(:format) { :html }
+
     context "with valid params" do
-      let(:valid_attributes) { { title: "New Todo", description: "Test description" } }
+      let(:params) { { todo: { title: "New Todo", description: "Test description" } } }
 
-      it "creates a new Todo" do
-        expect {
-          post :create, params: { todo: valid_attributes }
-        }.to change(Todo, :count).by(1)
-      end
+      it { expect { request }.to change(Todo, :count).by(1) }
 
-      it "responds with turbo stream" do
-        post :create, params: { todo: valid_attributes }, format: :turbo_stream
-        expect(response.content_type).to include("text/vnd.turbo-stream.html")
-        expect(response.body).to include('action="prepend"')
-        expect(response.body).to include('target="todos"')
+      context "when format is turbo_stream" do
+        let(:format) { :turbo_stream }
+
+        before { request }
+
+        its(:content_type) { is_expected.to include("text/vnd.turbo-stream.html") }
+        its(:body) { is_expected.to include('action="prepend"') }
+        its(:body) { is_expected.to include('target="todos"') }
       end
     end
 
     context "with invalid params" do
-      let(:invalid_attributes) { { title: "" } }
+      let(:params) { { todo: { title: "" } } }
 
-      it "does not create a new Todo" do
-        expect {
-          post :create, params: { todo: invalid_attributes }
-        }.not_to change(Todo, :count)
-      end
+      it { expect { request }.not_to change(Todo, :count) }
 
-      it "responds with unprocessable entity" do
-        post :create, params: { todo: invalid_attributes }, format: :turbo_stream
-        expect(response).to have_http_status(:unprocessable_entity)
+      context "when format is turbo_stream" do
+        let(:format) { :turbo_stream }
+
+        it { is_expected.to have_http_status(:unprocessable_entity) }
       end
     end
   end
 
   describe "PATCH #update" do
-    let(:todo) { create_todo(completed: false) }
+    subject(:request) { patch :update, params: params, format: format }
+
+    let(:todo) { create_todo(title: "Make coffee", completed: false) }
+    let(:format) { :html }
 
     context "with valid params" do
+      let(:params) { { id: todo.id, todo: { completed: true } } }
+
       it "updates the todo" do
-        patch :update, params: { id: todo.id, todo: { completed: true } }
-        todo.reload
-        expect(todo.completed).to be true
+        expect { request }.to change { todo.reload.completed }.from(false).to(true)
       end
 
-      it "responds with turbo stream" do
-        patch :update, params: { id: todo.id, todo: { completed: true } }, format: :turbo_stream
-        expect(response.content_type).to include("text/vnd.turbo-stream.html")
-        expect(response.body).to include('action="replace"')
-        expect(response.body).to include("todo_#{todo.id}")
+      context "when format is turbo_stream" do
+        let(:format) { :turbo_stream }
+
+        before { request }
+
+        its(:content_type) { is_expected.to include("text/vnd.turbo-stream.html") }
+        its(:body) { is_expected.to include('action="replace"') }
+        its(:body) { is_expected.to include("todo_#{todo.id}") }
       end
     end
 
     context "with invalid params" do
+      let(:params) { { id: todo.id, todo: { title: "" } } }
+
       it "does not update the todo" do
-        patch :update, params: { id: todo.id, todo: { title: "" } }
-        todo.reload
-        expect(todo.title).not_to eq("")
+        expect { request }.not_to change { todo.reload.title }.from("Make coffee")
       end
     end
   end
 
   describe "DELETE #destroy" do
+    subject(:request) { delete :destroy, params: { id: todo.id }, format: format }
+
     let!(:todo) { create_todo }
+    let(:format) { :html }
 
-    it "destroys the requested todo" do
-      expect {
-        delete :destroy, params: { id: todo.id }
-      }.to change(Todo, :count).by(-1)
-    end
+    it { expect { request }.to change(Todo, :count).by(-1) }
 
-    it "responds with turbo stream" do
-      delete :destroy, params: { id: todo.id }, format: :turbo_stream
-      expect(response.content_type).to include("text/vnd.turbo-stream.html")
-      expect(response.body).to include('action="remove"')
-      expect(response.body).to include("todo_#{todo.id}")
+    context "when format is turbo_stream" do
+      let(:format) { :turbo_stream }
+
+      before { request }
+
+      its(:content_type) { is_expected.to include("text/vnd.turbo-stream.html") }
+      its(:body) { is_expected.to include('action="remove"') }
+      its(:body) { is_expected.to include("todo_#{todo.id}") }
     end
   end
 end
