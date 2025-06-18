@@ -16,6 +16,8 @@ gem "rspec-rails"
 gem "rspec-its"  # For `its` syntax
 ```
 
+The `rspec/its` require is configured in `rails_helper.rb` - do not add it to individual spec files.
+
 ## Writing Specs
 
 ### Use `subject` for the Primary Action

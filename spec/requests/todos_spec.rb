@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'rspec/its'
 
 RSpec.describe "Todos", type: :request do
   describe "GET /todos" do

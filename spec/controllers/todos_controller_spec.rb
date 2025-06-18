@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'rspec/its'
 
 RSpec.describe TodosController, type: :controller do
   describe "GET #index" do

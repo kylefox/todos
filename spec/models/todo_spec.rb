@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'rspec/its'
 
 RSpec.describe Todo, type: :model do
   fixtures :todos

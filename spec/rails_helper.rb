@@ -13,6 +13,9 @@ require 'rspec/rails'
 # Configure shoulda-matchers
 require 'shoulda/matchers'
 
+# RSpec its syntax
+require 'rspec/its'
+
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
     with.test_framework :rspec
