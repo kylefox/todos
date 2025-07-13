@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2025-01-20
+
+- Upgrade Ruby from 3.3.7 to 3.4.4 (latest stable version)
+  - Updated .tool-versions and .ruby-version using mise
+  - Updated CLAUDE.md documentation to reflect new Ruby version
+  - All tests passing with new Ruby version
+
 ## 2025-01-19
 
 - Update Ruby gem dependencies to latest versions:

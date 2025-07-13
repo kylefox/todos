@@ -40,7 +40,7 @@ mise install
 ```
 
 This will install:
-- Ruby 3.3.7
+- Ruby 3.4.4
 - PostgreSQL 17.5
 
 **Note on PostgreSQL installation**: If the PostgreSQL installation fails with missing library errors, you may need to set environment variables to help it find the Homebrew dependencies:

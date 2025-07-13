@@ -27,7 +27,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Tech Stack
 
-- Ruby 3.3.7 (managed via mise)
+- Ruby 3.4.4 (managed via mise)
 - Rails 8 (with built-in Solid Cache, Solid Queue, Solid Cable)
 - PostgreSQL
 - Hotwire (Turbo + Stimulus)
