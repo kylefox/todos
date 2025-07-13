@@ -11,6 +11,8 @@
   - kamal 2.6.1 → 2.7.0
   - debug 1.10.0 → 1.11.0
   - And other minor dependency updates
+- Upgrade rspec-rails from 7.1.1 to 8.0.1 for Rails 8 compatibility
+  - All 76 tests passing without any changes required
 
 ## 2025-01-18 (continued)
 
