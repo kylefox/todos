@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 2025-01-19
+
+- Update Ruby gem dependencies to latest versions:
+  - rubocop 1.76.1 → 1.78.0
+  - selenium-webdriver 4.33.0 → 4.34.0
+  - solid_cable 3.0.8 → 3.0.11
+  - solid_queue 1.1.5 → 1.2.0
+  - tailwindcss-rails 4.2.3 → 4.3.0
+  - kamal 2.6.1 → 2.7.0
+  - debug 1.10.0 → 1.11.0
+  - And other minor dependency updates
+
 ## 2025-01-18 (continued)
 
 - Refactor controller specs with rspec-its gem for DRY principles
