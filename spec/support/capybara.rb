@@ -8,8 +8,8 @@ RSpec.configure do |config|
 
   # Use selenium_headless for tests that need JavaScript
   config.before(:each, type: :system, js: true) do
-    if ENV['CI'] || !system('which chromedriver > /dev/null 2>&1')
-      skip "Skipping JavaScript test - Chrome driver not available"
+    if ENV['CI']
+      skip "Skipping JavaScript test in CI environment"
     else
       driven_by :selenium_chrome_headless
     end

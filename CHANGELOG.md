@@ -4,6 +4,7 @@
 
 - Refactor controller specs with rspec-its gem for DRY principles
 - Apply RSpec best practices to entire test suite
+- Enable JavaScript system tests with Selenium Manager
 
 ## 2025-01-18
 
