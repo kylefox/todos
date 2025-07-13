@@ -91,28 +91,28 @@ RSpec.describe "Todo Management", type: :system do
       # Verify we're on the todos page with the form
       expect(page).to have_css("form#new_todo")
       expect(page).to have_content("No todos yet")
-      
+
       # Fill in the form
       fill_in "What needs to be done?", with: "AJAX Todo"
       fill_in "Add a description (optional)", with: "Created via Turbo"
-      
+
       # Store the current path
       current_path = page.current_path
-      
+
       # Submit the form
       click_button "Add Todo"
-      
+
       # Wait for the request to complete
       sleep 1
-      
+
       # Check if we're still on the same page (no redirect)
       expect(page.current_path).to eq(current_path)
-      
+
       # The todo should be created in the database
       todo = Todo.find_by(title: "AJAX Todo")
       expect(todo).to be_present
       expect(todo.description).to eq("Created via Turbo")
-      
+
       # For now, we'll just verify the todo was created
       # ActionCable broadcasts in test environment can be tricky
     end
