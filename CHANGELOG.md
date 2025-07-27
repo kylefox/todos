@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 2025-01-27
+
+- Reorganize project phases to defer PWA and production polish features
+  - Create PHASE_5.md for Production Launch Preparation
+  - Move PWA Infrastructure items from Phase 1 to Phase 5
+  - Move Polish & Launch Prep items from Phase 1 to Phase 5
+  - Update PROJECT_ROADMAP.md to include Phase 5
+  - Phase 1 now focuses solely on core todo functionality
+
 ## 2025-01-20
 
 - Upgrade Ruby from 3.3.7 to 3.4.4 (latest stable version)

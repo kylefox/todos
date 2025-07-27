@@ -1,6 +1,6 @@
 # Phase 1: Core Todo App Foundation
 
-This checklist breaks down the implementation of our real-time PWA todo management application.
+This checklist breaks down the implementation of our real-time todo management application.
 
 ## Setup & Foundation
 
@@ -11,16 +11,6 @@ This checklist breaks down the implementation of our real-time PWA todo manageme
 - [x] Create responsive base layout
 - [x] Set up mobile viewport meta tags
 - [x] Configure development environment
-
-## PWA Infrastructure
-
-- [x] Create manifest.json with app metadata
-- [ ] Design and add app icons (multiple sizes)
-- [x] Set up basic service worker
-- [ ] Configure offline page
-- [ ] Add install prompt for mobile/desktop
-- [ ] Set up caching strategy for assets
-- [ ] Test PWA installation flow
 
 ## Todo Model & Database
 
@@ -111,12 +101,6 @@ This checklist breaks down the implementation of our real-time PWA todo manageme
 - [ ] Test offline functionality
 - [ ] Add performance benchmarks
 
-## Polish & Launch Prep
+## Demo Data
 
-- [ ] Add subtle animations and transitions
-- [ ] Create favicon set
 - [x] Write seed data for demos
-- [ ] Add analytics tracking code
-- [ ] Set up error monitoring
-- [ ] Create 404/500 error pages
-- [ ] Final cross-browser testing

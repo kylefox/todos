@@ -5,11 +5,11 @@
 ## Phase 1: Core Todo App Foundation
 
 - **Todo list:** PHASE_1.md
-- **Status:** In Progress (~80% complete)
+- **Status:** In Progress (~90% complete)
 - **Completed:** Basic Rails setup, Tailwind CSS, responsive layout, PWA manifest, Todo model with validations and tests, full CRUD actions, real-time updates with Turbo Streams, todo UI components, comprehensive test suite (47 tests), Stimulus controllers for interactivity
-- **Next steps:** PWA features (service worker, icons), performance optimization, accessibility improvements
+- **Next steps:** Complete remaining core features
 
-### Milestone 1.1: Real-time PWA Todo Management
+### Milestone 1.1: Real-time Todo Management
 - Create, edit, and delete todos with instant updates
 - Mark todos as complete/incomplete with real-time sync
 - View all todos in a clean, organized list
@@ -17,10 +17,6 @@
 - Optimistic UI updates for smooth user experience
 - Basic form validation and error handling
 - Responsive design that works on all screen sizes
-- Mobile-friendly touch interactions and gestures
-- Install as app on mobile/desktop devices
-- Works offline for viewing todos
-- Fast loading with smart caching
 
 ## Phase 2: Enhanced Todo Features
 
@@ -80,6 +76,27 @@
 - Track all changes to todos
 - Activity timeline for projects
 - Notifications for updates
+
+## Phase 5: Production Launch Preparation
+
+- **Todo list:** PHASE_5.md
+- **Status:** Not Started
+- **Focus:** PWA features and final design polish for production readiness
+
+### Milestone 5.1: PWA Infrastructure
+- Design and add app icons (multiple sizes)
+- Configure offline page
+- Add install prompt for mobile/desktop
+- Set up caching strategy for assets
+- Test PWA installation flow
+
+### Milestone 5.2: Polish & Launch Prep
+- Add subtle animations and transitions
+- Create favicon set
+- Add analytics tracking code
+- Set up error monitoring
+- Create 404/500 error pages
+- Final cross-browser testing
 
 ---
 
