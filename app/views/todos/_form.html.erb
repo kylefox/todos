@@ -1,0 +1,14 @@
+<%= form_with(
+  model: todo,
+  id: "new_todo",
+  data: {
+    controller: "reset-form",
+    action: "turbo:submit-end->reset-form#reset"
+  }) do |form| %>
+  <%= form.text_field :title,
+      placeholder: "What needs to be done?",
+      class: "block w-full rounded-lg shadow-sm bg-white py-3 px-4",
+      required: true,
+      autofocus: true,
+      maxlength: 255 %>
+<% end %>

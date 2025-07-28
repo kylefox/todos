@@ -10,7 +10,7 @@ class TodosController < ApplicationController
 
     if @todo.save
       respond_to do |format|
-        format.turbo_stream { render turbo_stream: turbo_stream.prepend("todos", @todo) }
+        format.turbo_stream { render turbo_stream: turbo_stream.append("todos", @todo) }
         format.html { redirect_to todos_path }
       end
     else
