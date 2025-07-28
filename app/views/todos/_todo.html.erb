@@ -10,7 +10,12 @@
       todo_id: todo.id
     } %>
   </div>
-  <div class="flex-1 min-w-0 text-slate-700 <%= 'line-through text-gray-500' if todo.completed? %>">
-    <%= todo.title %>
+  <div class="flex-1 min-w-0">
+    <%= tag.span(
+      todo.title,
+      class: class_names(
+        "text-slate-700" => !todo.completed?,
+        "line-through text-slate-400" => todo.completed?
+      )) %>
   </div>
 <% end %>
