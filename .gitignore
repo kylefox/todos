@@ -38,3 +38,5 @@
 
 # Ignore Claude Code local settings
 .claude/settings.local.json
+
+/config/credentials/production.key
