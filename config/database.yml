@@ -21,8 +21,13 @@ default: &default
 
 
 development:
-  <<: *default
-  database: todos_development
+  primary:
+    <<: *default
+    database: todos_development
+  cache:
+    <<: *default
+    database: todos_development_cache
+    migrations_paths: db/cache_migrate
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
@@ -82,8 +87,10 @@ production:
   primary: &primary_production
     <<: *default
     database: todos_production
-    username: todos
-    password: <%= ENV["TODOS_DATABASE_PASSWORD"] %>
+    host: <%= ENV["DATABASE_HOST"] %>
+    username: <%= ENV["DATABASE_USERNAME"] %>
+    password: <%= ENV["DATABASE_PASSWORD"] %>
+    port: <%= ENV["DATABASE_PORT"] %>
   cache:
     <<: *primary_production
     database: todos_production_cache

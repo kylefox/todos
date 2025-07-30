@@ -38,5 +38,8 @@ module Todos
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # Replace the default in-process memory cache store with a durable alternative.
+    config.cache_store = :solid_cache_store
   end
 end
