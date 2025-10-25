@@ -5,10 +5,11 @@
       todo.completed?,
       class: "h-5 w-5 text-blue-600 rounded-lg focus:ring-blue-500 cursor-pointer",
       data: {
-      controller: "todo-checkbox",
-      action: "change->todo-checkbox#toggle",
-      todo_id: todo.id
-    } %>
+        turbo_permanent: true,
+        controller: "todo-checkbox",
+        action: "change->todo-checkbox#toggle",
+        todo_id: todo.id
+      } %>
   </div>
   <div class="flex-1 min-w-0">
     <%= tag.span(
