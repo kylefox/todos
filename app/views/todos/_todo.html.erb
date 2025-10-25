@@ -14,8 +14,16 @@
     <%= tag.span(
       todo.title,
       class: class_names(
-        "text-slate-700" => !todo.completed?,
+        "text-slate-700 font-medium" => !todo.completed?,
         "line-through text-slate-400" => todo.completed?
       )) %>
+
+    <% if todo.description.present? %>
+      <%= tag.p(
+        todo.description,
+        class: "mt-1 text-sm text-slate-500",
+        data: { test_id: "todo-description" }
+      ) %>
+    <% end %>
   </div>
 <% end %>

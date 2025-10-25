@@ -2,6 +2,7 @@ class TodosController < ApplicationController
   before_action :set_todo, only: %i[update destroy]
 
   def index
+    @todo = Todo.new
     @todos = Todo.recent
   end
 
@@ -10,13 +11,40 @@ class TodosController < ApplicationController
 
     if @todo.save
       respond_to do |format|
-        format.turbo_stream { render turbo_stream: turbo_stream.append("todos", @todo) }
-        format.html { redirect_to todos_path }
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.prepend(
+              "todos",
+              partial: "todos/todo",
+              locals: { todo: @todo }
+            ),
+            turbo_stream.replace(
+              "empty_state",
+              partial: "todos/empty_state",
+              locals: { todos_present: Todo.exists? }
+            ),
+            turbo_stream.replace(
+              "todo_form",
+              partial: "todos/form",
+              locals: { todo: Todo.new }
+            )
+          ]
+        end
+        format.html { redirect_to todos_path, notice: "Todo was successfully created." }
       end
     else
       respond_to do |format|
-        format.turbo_stream { head :unprocessable_entity }
-        format.html { redirect_to todos_path, alert: @todo.errors.full_messages.join(", ") }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            "todo_form",
+            partial: "todos/form",
+            locals: { todo: @todo }
+          ), status: :unprocessable_entity
+        end
+        format.html do
+          redirect_to todos_path, status: :see_other,
+                                  alert: @todo.errors.full_messages.to_sentence
+        end
       end
     end
   end
@@ -39,8 +67,17 @@ class TodosController < ApplicationController
     @todo.destroy
 
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.remove(@todo) }
-      format.html { redirect_to todos_path }
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.remove(@todo),
+          turbo_stream.replace(
+            "empty_state",
+            partial: "todos/empty_state",
+            locals: { todos_present: Todo.exists? }
+          )
+        ]
+      end
+      format.html { redirect_to todos_path, notice: "Todo was successfully removed." }
     end
   end
 
