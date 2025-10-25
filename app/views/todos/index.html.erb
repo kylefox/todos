@@ -1,9 +1,24 @@
 <%= turbo_stream_from "todos" %>
 
-<div class="mb-3">
-  <%= render "form", todo: Todo.new %>
-</div>
+<div class="space-y-6">
+  <header class="flex flex-col gap-2">
+    <h1 class="text-3xl font-semibold text-slate-900">My Todos</h1>
+    <p class="text-slate-500">Keep track of everything you need to get done.</p>
+  </header>
 
-<div class="overflow-hidden divide-y divide-slate-200 rounded-lg shadow-sm" id="todos">
-  <%= render @todos %>
+  <div class="rounded-lg border border-slate-200 bg-slate-50 p-6 shadow-sm">
+    <%= turbo_frame_tag "todo_form" do %>
+      <%= render "form", todo: @todo %>
+    <% end %>
+  </div>
+
+  <div class="rounded-lg border border-slate-200 bg-white shadow-sm">
+    <div class="divide-y divide-slate-200" id="todos">
+      <%= render @todos %>
+    </div>
+
+    <%= turbo_frame_tag "empty_state" do %>
+      <%= render "empty_state", todos_present: @todos.any? %>
+    <% end %>
+  </div>
 </div>

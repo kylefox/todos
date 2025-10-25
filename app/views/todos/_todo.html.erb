@@ -4,18 +4,28 @@
       todo.id,
       todo.completed?,
       class: "h-5 w-5 text-blue-600 rounded-lg focus:ring-blue-500 cursor-pointer",
+      id: dom_id(todo, :completed),
       data: {
-      controller: "todo-checkbox",
-      action: "change->todo-checkbox#toggle",
-      todo_id: todo.id
-    } %>
+        turbo_permanent: true,
+        controller: "todo-checkbox",
+        action: "change->todo-checkbox#toggle",
+        todo_id: todo.id
+      } %>
   </div>
   <div class="flex-1 min-w-0">
     <%= tag.span(
       todo.title,
       class: class_names(
-        "text-slate-700" => !todo.completed?,
+        "text-slate-700 font-medium" => !todo.completed?,
         "line-through text-slate-400" => todo.completed?
       )) %>
+
+    <% if todo.description.present? %>
+      <%= tag.p(
+        todo.description,
+        class: "mt-1 text-sm text-slate-500",
+        data: { test_id: "todo-description" }
+      ) %>
+    <% end %>
   </div>
 <% end %>
