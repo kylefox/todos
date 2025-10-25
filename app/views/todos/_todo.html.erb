@@ -4,6 +4,7 @@
       todo.id,
       todo.completed?,
       class: "h-5 w-5 text-blue-600 rounded-lg focus:ring-blue-500 cursor-pointer",
+      id: dom_id(todo, :completed),
       data: {
         turbo_permanent: true,
         controller: "todo-checkbox",
